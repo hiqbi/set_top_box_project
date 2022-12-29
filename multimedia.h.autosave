@@ -1,0 +1,32 @@
+#ifndef MULTIMEDIA_H
+#define MULTIMEDIA_H
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+
+class Multimedia
+{
+private :
+    string name{}, fileName{} ;
+
+public:
+    virtual ~Multimedia() ;
+
+    Multimedia();
+    Multimedia(string name, string fileName) ;
+
+    void setName(string name) ;
+    void setFileName(string newFileName) ;
+
+    string getName() const ;
+    string getFileName() const ;
+
+    virtual void print(std::ostream &) ;
+};
+
+
+#endif // MULTIMEDIA_H
