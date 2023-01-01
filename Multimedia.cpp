@@ -1,33 +1,43 @@
 #include "Multimedia.h"
+#include <iostream>
+#include <string>
 
 using namespace std ;
 
-Multimedia::Multimedia() = default;
+Multimedia::Multimedia(){
+    this->name = "" ;
+    this->fileName = "" ;
+}
 
 Multimedia::Multimedia(string name, string fileName){
-    setName(name) ;
-    setFileName(fileName) ;
+    this->name = name ;
+    this->fileName = fileName ;
 }
 
 void Multimedia::setName(string newName){
-    Multimedia::name = newName ;
+    this->name = newName ;
 }
 
 void Multimedia::setFileName(string newFileName){
-    Multimedia::fileName = newFileName ;
+    this->fileName = newFileName ;
 }
 
 string Multimedia::getName() const {
-    return name ;
+    return this->name ;
 }
 
 string Multimedia::getFileName() const {
-    return fileName ;
+    return this->fileName ;
 }
 
 void Multimedia::print(ostream& output) const {
-    output << "file name : " << fileName
+    output << "file name : " << this->fileName
            << endl
-           << "name : " << name
+           << "name : " << this->name
            << endl;
+}
+
+Multimedia::~Multimedia() {
+    cout << "Multimedia instance " << this->name << " destroyed." << endl
+         << "Mission accomplished !" << endl ;
 }

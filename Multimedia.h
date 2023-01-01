@@ -8,13 +8,16 @@ using namespace std ;
 
 class Multimedia
 {
-    string name{}, fileName{} ;
+private :
+    string name{} ;
+    string fileName{} ;
 
 public:
-    virtual ~Multimedia(){cerr << "Destruction of " << name << "\n" ;} ;
 
-    Multimedia();
+    Multimedia() ;
     Multimedia(string name, string fileName) ;
+
+    virtual ~Multimedia() ;
 
     void setName(string newName) ;
     void setFileName(string newFileName) ;
@@ -22,7 +25,7 @@ public:
     string getName() const ;
     string getFileName() const ;
 
-    virtual void print(ostream& output) const = 0;
+    virtual void print(ostream& output) const ;
 };
 
 

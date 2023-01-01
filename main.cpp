@@ -3,11 +3,16 @@
 // Created on 21/10/2018
 //
 
+#include "Multimedia.h"
 #include <iostream>
-using namespace std;
+#include <string>
 
-int main(int argc, const char* argv[])
-{
-    std::cout << "Hello brave new world" << std::endl;
-    return 0;
+using namespace std ;
+
+
+int main(int argc, const char *argv[]){
+    Multimedia *complete = new Multimedia() ;
+    //cout << "complete class name : " << complete->getName() << endl ;
+
+    return 0 ;
 }
