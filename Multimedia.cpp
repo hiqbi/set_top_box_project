@@ -5,39 +5,41 @@
 using namespace std ;
 
 Multimedia::Multimedia(){
-    this->name = "" ;
-    this->fileName = "" ;
+    name = "" ;
+    path = "" ;
 }
 
-Multimedia::Multimedia(string name, string fileName){
+Multimedia::Multimedia(string name, string path){
     this->name = name ;
-    this->fileName = fileName ;
+    this->path = path ;
 }
 
 void Multimedia::setName(string newName){
-    this->name = newName ;
+    name = newName ;
 }
 
-void Multimedia::setFileName(string newFileName){
-    this->fileName = newFileName ;
+void Multimedia::setPath(string newPath){
+    path = newPath ;
 }
 
 string Multimedia::getName() const {
-    return this->name ;
+    return name ;
 }
 
-string Multimedia::getFileName() const {
-    return this->fileName ;
+string Multimedia::getPath() const {
+    return path ;
 }
 
 void Multimedia::print(ostream& output) const {
-    output << "file name : " << this->fileName
+    output << "Multimedia : "
            << endl
-           << "name : " << this->name
+           << "Path name : " << path
+           << endl
+           << "name : " << name
            << endl;
 }
 
 Multimedia::~Multimedia() {
-    cout << "Multimedia instance " << this->name << " destroyed." << endl
+    cout << "Multimedia instance " << name << " destroyed." << endl
          << "Mission accomplished !" << endl ;
 }
