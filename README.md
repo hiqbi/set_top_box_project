@@ -38,3 +38,25 @@ for (unsigned int k = 0 ; k < count ; ++k) {
 > Ce qui est spécifiquement nécessaire de faire dans le cas de C++ : déclarer tous les objets contenus dans le tableau comme des instances de la classe `Multimedia` et aussi déclarer le tableau lui même comme conteneur d'objets de type `auto` pour pouvoir décider le type des objets à la compilation.
 
 > Le type des élements du tableau : ce sont des **pointeurs** vers des objets du fait que `new` renvoie un pointeur.
+
+## Séance 2 : étapes 6-7
+
+### Etape 7 : Destruction et copie d'objets
+
+Il faut modifier la classe `Film.h` pour éviter des fuites de mémoire.
+
+> Le problème de la copie (*shallow*) d'objet quand des pointeurs sont mis en jeu comme variables d'instance :
+
+Les objets créé via une copie contiendront des pointeurs vers les mêmes variables d'instance que l'objet d'origine. Dans ce cas, la destruction de l'objet d'origine entraînera la déstruction des variables d'instance de la copie. 
+
+On utilisera donc une copie profonde (*deep copy*).
+
+Pour ce faire, il faut modifier l'opérateur d'affectation :
+```c++
+Film &operator=(const Film &from)
+```
+
+## Séance : étapes 8-9
+
+### Etape 8 : Créer des groupes
+
