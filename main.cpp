@@ -6,6 +6,7 @@
 #include "Multimedia.h"
 #include "Photo.h"
 #include "Video.h"
+#include "Film.h"
 #include <iostream>
 #include <string>
 
@@ -39,6 +40,15 @@ int main(){
     for (unsigned int k = 0 ; k < count ; ++k) {
         multimedia[k]->print(cout) ;
     }
+
+    //Etape 6
+    cout << endl << "#----- Etape 6 : La classe Film -----#" << endl ;
+
+    Film * film1 = new Film("film1", "film1 file", 10, 4, new int[4]{2, 3, 1, 4}) ;
+    film1->print(cout) ;
+
+    //Etape 7
+    cout << endl << "#----- etape 7 : Destruction et copie des objets -----#" << endl ;
 
     return 0 ;
 }

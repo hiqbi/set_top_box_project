@@ -13,6 +13,8 @@ private :
 
 public :
 
+
+    Video() : Multimedia() {length = 0 ;}
     Video(string name, string path, float length) : Multimedia(name, path), length{length} {}
 
     void setLength(float newLength) {length = newLength ;}
