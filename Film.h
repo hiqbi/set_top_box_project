@@ -63,6 +63,15 @@ public :
             output << "-Chapter " << i << " has length " << chapters[i] << endl ;
         }
     }
+
+    // On modifie l'opérateur d'affectation pour effectuer la deep copy
+    Film& operator=(const Film& from) {
+        this->setName(from.getName()) ;
+        this->setPath(from.getPath()) ;
+        this->setChapters(from.getChapters(), from.getChaptersNumber()) ;
+
+        return *this ;
+    }
 };
 
 #endif // FILM_H

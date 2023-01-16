@@ -50,5 +50,12 @@ int main(){
     //Etape 7
     cout << endl << "#----- etape 7 : Destruction et copie des objets -----#" << endl ;
 
+    Film film2 ;
+    film2 = *film1 ;
+    film2.print(cout) ;
+    delete film1 ;
+    film2.print(cout) ;
+    cout << "La copie film2 rest inchangée et garde les même valeurs de ses attributs."
+
     return 0 ;
 }
