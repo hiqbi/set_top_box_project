@@ -7,6 +7,7 @@
 #include "Photo.h"
 #include "Video.h"
 #include "Film.h"
+#include "Group.h"
 #include <iostream>
 #include <string>
 
@@ -55,7 +56,21 @@ int main(){
     film2.print(cout) ;
     delete film1 ;
     film2.print(cout) ;
-    cout << "La copie film2 rest inchangée et garde les même valeurs de ses attributs."
+    cout << "La copie film2 rest inchangée et garde les même valeurs de ses attributs." << endl ;
+
+    //Etape 8
+    cout << endl << "#----- Etape 8 : Créer des groupes -----#" << endl ;
+
+    ptrMultimedia p1(new Video("Group video", "Group File", 10)) ;
+    ptrMultimedia p2(new Photo("Group photo", "Group File", 720, 1080)) ;
+    Group g ;
+    g.setName("New group g") ;
+    g.assign(1, p1) ;
+    list<ptrMultimedia>:: iterator it = g.begin() ;
+    advance(it, 1) ;
+    g.insert(it, p2) ;
+    g.print(cout) ;
+    // Tous les elements contenus dans g sont détruites automatiquement du fait que l'on travaille avec des smart pointers
 
     return 0 ;
 }
