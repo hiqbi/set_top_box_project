@@ -60,3 +60,36 @@ Film &operator=(const Film &from)
 
 ### Etape 8 : Créer des groupes
 
+On crée une class `Group` qui hérite de `std::list<Multimedia *>`. Il est à noter que l'héritage est publique afin de pouvoir utiliser les méthodes de `std::list` sur un objet instancié de la classe `Group`
+
+> La liste d'objets doit être une liste de pointeurs d'objets : en effet, les objets `Group` contienderons des objets de types différents (Photo, Video & Film). 
+
+> Comparaison à JAVA : On stocke toujours des pointeurs vers des objets sans même faire la distinction si ces objets sont du même type ou pas.
+
+### Etape 9 : Gestion automatique de la mémoire
+
+On commence par définir un nouveau type `ptrMultimedia` de smart pointers vers des objets multumedia :
+```c++
+using namespace std ;
+typedef std::shared_ptr<Multimedia> ptrMultimedia ;
+```
+La classe `Group` hérite publiquement de `list<ptrMultimedia>`.
+
+On teste la bonne implémentation de cette classe dans `main.cpp` en créant une instance de `Photo` et une autre de `Video` ainsi que deux instances de `Group`. On vérifie bien que les objets des groupes sont détruits quand ils n'appartiennent plus à aucun groupe.
+
+```c++
+ptrMultimedia vid(new Video("vid", "vid_file", 10)) ;
+ptrMultimedia img(new Photo("img", "img_file", 720, 1080)) ;
+Group * grp1 = new Group("grp1");
+Group * grp2 = new Group("grp2") ;
+grp1->assign(1, img) ;
+grp2->assign(1, img) ;
+list<ptrMultimedia>:: iterator it = grp1->begin() ;
+advance(it, 1) ;
+grp1->insert(it, vid) ;
+grp1->print(cout) ;
+delete grp1 ;
+grp2->print(cout) ;
+delete grp2 ;
+```
+A l'exécution, on a que `img`, qui est partagée par deux smart pointers contenus dans les deux groupes, n'est détruite qu'après la destruction de `grp1` et `grp2`.

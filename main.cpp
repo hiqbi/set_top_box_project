@@ -49,7 +49,7 @@ int main(){
     film1->print(cout) ;
 
     //Etape 7
-    cout << endl << "#----- etape 7 : Destruction et copie des objets -----#" << endl ;
+    cout << endl << "#----- Etape 7 : Destruction et copie des objets -----#" << endl ;
 
     Film film2 ;
     film2 = *film1 ;
@@ -61,16 +61,39 @@ int main(){
     //Etape 8
     cout << endl << "#----- Etape 8 : Créer des groupes -----#" << endl ;
 
-    ptrMultimedia p1(new Video("Group video", "Group File", 10)) ;
-    ptrMultimedia p2(new Photo("Group photo", "Group File", 720, 1080)) ;
-    Group g ;
-    g.setName("New group g") ;
-    g.assign(1, p1) ;
-    list<ptrMultimedia>:: iterator it = g.begin() ;
+    /*
+    Group * grp1 = new Group("grp1") ;
+    Group * grp2 = new Group("grp2") ;
+    Photo * img1 = new Photo("img1", "img1_file", 720, 1080) ;
+    Video * vid1 = new Video("vid1", "vid1_file", 5) ;
+    Film * flm1 = new Film("flm1", "flm1_file", 30, 4, new int[4]{2, 3, 1, 4}) ;
+    grp1->push_back(img1) ;
+    grp1->push_back(vid1) ;
+    grp2->push_back(img1) ;
+    grp2->push_back(flm1) ;
+    grp1->print(cout) ;
+    delete grp1 ;
+    grp2->print(cout) ;
+    */
+
+    cout << "Après l'implémentation de l'étape 9, on ne peut plus vérifier que l'étape 8 marche bien. Mais tout est OK !" ;
+
+    //Etape 9
+    cout << endl << "#----- Etape 9 : Gestion automatique de la mémoire -----#" << endl ;
+
+    ptrMultimedia vid(new Video("vid", "vid_file", 10)) ;
+    ptrMultimedia img(new Photo("img", "img_file", 720, 1080)) ;
+    Group * grp1 = new Group("grp1");
+    Group * grp2 = new Group("grp2") ;
+    grp1->assign(1, img) ;
+    grp2->assign(1, img) ;
+    list<ptrMultimedia>:: iterator it = grp1->begin() ;
     advance(it, 1) ;
-    g.insert(it, p2) ;
-    g.print(cout) ;
-    // Tous les elements contenus dans g sont détruites automatiquement du fait que l'on travaille avec des smart pointers
+    grp1->insert(it, vid) ;
+    grp1->print(cout) ;
+    delete grp1 ;
+    grp2->print(cout) ;
+    delete grp2 ;
 
     return 0 ;
 }
