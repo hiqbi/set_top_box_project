@@ -93,3 +93,15 @@ grp2->print(cout) ;
 delete grp2 ;
 ```
 A l'exécution, on a que `img`, qui est partagée par deux smart pointers contenus dans les deux groupes, n'est détruite qu'après la destruction de `grp1` et `grp2`.
+
+### Etape 10 : Gestion cohérente des données
+
+On écrit la classe `Mapping` ayant deux attributs : `map<string, ptrMultimedia>` pour contenir tout les objets multimedia & `map<string, ptrGroup>` pour stocker tout les groupes. Avec `ptrMultimedia` & `ptrGroup` sont des smart pointers définis comme suit :
+
+```c++
+using namespace std ;
+typedef shared_ptr<Multimedia> ptrMultimedia ;
+typedef shared_ptr<Group> ptrGroup ;
+```
+
+> Si l'on crée directement un objet avec `new`, il n'appartiendra à aucune table. On peut interdire un tel usage en déclarant les constructeurs de la classe `Multimedia` comme étant `private` et déclarer la classe `Mapping` comme étant `friend`.

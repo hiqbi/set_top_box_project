@@ -1,5 +1,6 @@
 Film.h
 Group.h
+Mapping.h
 Multimedia.cpp
 Multimedia.h
 Photo.h

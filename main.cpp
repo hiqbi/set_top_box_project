@@ -8,6 +8,7 @@
 #include "Video.h"
 #include "Film.h"
 #include "Group.h"
+#include "Mapping.h"
 #include <iostream>
 #include <string>
 
@@ -94,6 +95,18 @@ int main(){
     delete grp1 ;
     grp2->print(cout) ;
     delete grp2 ;
+
+    //Etape 10
+    cout << endl << "#----- Etape 10 : Gestion cohérente des données -----#" << endl ;
+
+    Mapping map = Mapping() ;
+    shared_ptr<Photo> photo_map = map.createPhoto("photo_map", "desktop", 480, 480) ;
+    shared_ptr<Video> video_map = map.createVideo("video_map", "desktop", 1) ;
+    map.printMultimedia("photo_map", cout) ;
+    ptrGroup group_ptr = map.createGroup("group_ptr") ;
+    group_ptr->push_back(video_map) ;
+    group_ptr->push_back(photo_map) ;
+    map.printGroup("group_ptr", cout) ;
 
     return 0 ;
 }
