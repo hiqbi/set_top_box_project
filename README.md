@@ -105,3 +105,21 @@ typedef shared_ptr<Group> ptrGroup ;
 ```
 
 > Si l'on crée directement un objet avec `new`, il n'appartiendra à aucune table. On peut interdire un tel usage en déclarant les constructeurs de la classe `Multimedia` comme étant `private` et déclarer la classe `Mapping` comme étant `friend`.
+
+### Etape 11 : Client/Serveur
+
+Dans main, on crée des objets multimedia ainsi qu'un group pour tester : 
+
+```c++
+Mapping all = Mapping() ;
+shared_ptr<Photo> vvg = all.createPhoto("vvg.jpg", "./", 794, 1000) ;
+shared_ptr<Video> rickroll = all.createVideo("rickroll.mp4", "./", 1) ;
+ptrGroup group = all.createGroup("group") ;
+group->push_back(vvg) ;
+group->push_back(rickroll) ;
+```
+
+Dans le terminal :
+
+##### En tapant `make run` dans le répertoire contenant le Serveur, on lance la boucle infinie de celui-ci : il est donc prêt à recevoir la requête du Client.
+##### Dans le répertoire contenant le Client (`tcpserver` pour tester, puis le répertoire `swing` une fois l'interface graphique est faite), un `./client` (ou `make run` après l'ajout du `Makefile`) permet d'établir la connexion Client/Serveur. Il suffit après d'envoyer la requête depuis ce terminal.

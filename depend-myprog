@@ -1,2 +1,0 @@
-main.o: main.cpp Multimedia.h Photo.h Video.h Film.h Group.h
-Multimedia.o: Multimedia.cpp Multimedia.h

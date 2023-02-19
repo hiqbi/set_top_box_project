@@ -33,7 +33,7 @@ public :
     }
 
     void play() const override {
-        string sys = "mpv " + this->getPath() + " &" ;
+        string sys = "mpv " + this->getPath() + this->getName() + " &" ;
         system(sys.data()) ; //data() : pour retourner un pointeur
     }
 };

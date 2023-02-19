@@ -36,7 +36,7 @@ public :
     }
 
     void play() const override {
-        string sys = "imagej " + this->getPath() + " &" ;
+        string sys = "xdg-open " + this->getPath() + this->getName() + " &" ;
         system(sys.data()) ; //data() : pour retourner un pointeur
     }
 

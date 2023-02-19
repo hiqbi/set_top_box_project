@@ -1,7 +1,4 @@
-//
-// main.cpp
-// Created on 21/10/2018
-//
+#define VERSION_2
 
 #include "Multimedia.h"
 #include "Photo.h"
@@ -14,6 +11,7 @@
 
 using namespace std ;
 
+#ifdef VERSION_1
 
 int main(){
 
@@ -110,3 +108,110 @@ int main(){
 
     return 0 ;
 }
+
+#endif
+
+#ifdef VERSION_2
+
+#include <sstream>
+#include "tcp/tcpserver.h"
+
+const int PORT = 3331 ;
+
+enum class Command {
+    PRINT_MULTIMEDIA,
+    PRINT_GROUP,
+    PLAY_MULTIMEDIA,
+    STOP,
+    NOT_FOUND
+};
+
+map<string, Command> possible_commands = {
+    {"print", Command::PRINT_MULTIMEDIA},
+    {"print_group", Command::PRINT_GROUP},
+    {"play", Command::PLAY_MULTIMEDIA},
+    {"stop", Command::STOP},
+};
+
+Command cmd(string command) {
+    if (possible_commands.find(command) != possible_commands.end()) return possible_commands[command] ;
+    return Command::NOT_FOUND ;
+}
+
+int main(int argc, const char *argv[]) {
+
+    Mapping all = Mapping() ;
+    shared_ptr<Photo> vvg = all.createPhoto("vvg.jpg", "./", 794, 1000) ;
+    shared_ptr<Video> rickroll = all.createVideo("rickroll.mp4", "./", 1) ;
+    ptrGroup group = all.createGroup("group") ;
+    group->push_back(vvg) ;
+    group->push_back(rickroll) ;
+
+    auto *server = new TCPServer([&](string const &request, string &response) // To initialize the server
+    {
+        cout << "Request : " << request << endl ;
+
+        stringstream ss(request) ; // request a la forme, par exemple, de (print_group grp1)
+        string command ;
+        ss >> command ; // >> s'arrête dès quelle trouve un espace
+
+        stringstream to_send = stringstream() ;
+
+        switch(cmd(command)) {
+            case Command::PRINT_MULTIMEDIA :
+            {
+                string name ;
+                ss >> name ;
+                all.printMultimedia(name, to_send) ;
+                response = to_send.str() ;
+                break ;
+            }
+
+            case Command::PRINT_GROUP :
+            {
+                string name ;
+                ss >> name ;
+                all.printGroup(name, to_send) ;
+                response = to_send.str() ;
+                break ;
+            }
+
+            case Command::PLAY_MULTIMEDIA :
+            {
+                string name ;
+                ss >> name ;
+                all.play(name) ;
+                response = to_send.str() ;
+                break ;
+            }
+
+            case Command::STOP :
+            {
+                response = "stop" ;
+                return false ;
+                break ;
+            }
+
+            default :
+                response = "Command not found" ;
+                return true ;
+                break ;
+        }
+
+        cout << "Response : " << response << endl ;
+
+        return true ;
+    }) ;
+
+    cout << "Starting server on port " << PORT << endl ;
+
+    int status = server->run(PORT) ; // La boucle infinie du serveur est lancée
+
+    if (status < 0) {
+        cerr << "Something went wrong !" << endl ;
+        return 1 ;
+    }
+
+    return 0 ;
+}
+#endif

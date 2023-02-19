@@ -65,13 +65,13 @@ public :
     }
 
     void printMultimedia(string toPrint, ostream & output) const {
-        ptrMultimedia found = findMultimedia(toPrint) ;
+        ptrMultimedia found = this->findMultimedia(toPrint) ;
         if (found != nullptr) found->print(output) ;
         else output << "Nothing to print !" ;
     }
 
     void printGroup(string toPrint, ostream & output) const {
-        ptrGroup found = findGroup(toPrint) ;
+        ptrGroup found = this->findGroup(toPrint) ;
         if (found != nullptr) found->print(output) ;
         else output << "Nothing to print" ;
     }
