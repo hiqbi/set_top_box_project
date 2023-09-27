@@ -1,4 +1,4 @@
-# INF224 - Project C++
+# INF224 - Projet C++
 
 ## Séance 1 : étapes 1-5
 
